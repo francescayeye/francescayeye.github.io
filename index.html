@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The 4th Day - Pitch Deck</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Crimson Pro for formal elegance; Courier Prime for meticulous documentation -->
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,500;1,400&family=Courier+Prime&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* 1. CORE SETUP - REFINED FORMALISM */
+        * { box-sizing: border-box; }
+        body {
+            background-color: #0c0a09;
+            margin: 0;
+            padding: 20px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            background-color: #0c0a09;
+            color: #d1cdc0;
+            font-family: 'Crimson Pro', serif;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 60px;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.9);
+            border: 1px solid #292524;
+        }
+
+        /* PALETTE INSPIRED BY "LUNGA VITA ALLA SIGNORA" */
+        :root {
+            --color-deep-wine: #3b0d0c;
+            --color-olive-dark: #2d301d;
+            --color-ochre: #8b6e42;
+            --color-cream: #d1cdc0;
+            --color-ash: #57534e;
+            --color-ink: #0c0a09;
+        }
+
+        /* FILM GRAIN & GRADIENT OVERLAY - ESSENTIAL ATMOSPHERE */
+        .slide-container::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: 
+                radial-gradient(circle at center, transparent 0%, rgba(12, 10, 9, 0.4) 100%),
+                url('https://www.transparenttextures.com/patterns/stardust.png');
+            opacity: 0.50;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        h1, h2, h3 { 
+            font-weight: 300; 
+            margin: 0;
+            line-height: 1.1;
+            color: var(--color-cream);
+        }
+
+        p, li, td, th {
+            font-size: 20px;
+            line-height: 1.5;
+            color: #a8a29e;
+        }
+
+        .mono {
+            font-family: 'Courier Prime', monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            font-size: 12px;
+            color: var(--color-ochre);
+        }
+
+        .slide-title {
+            font-size: 48px;
+            margin-bottom: 40px;
+            width: 100%;
+            text-align: left;
+            border-bottom: 1px solid var(--color-ash);
+            padding-bottom: 15px;
+            font-style: italic;
+        }
+
+        .content-area {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;
+        }
+
+        /* LAYOUT DEFINITIONS */
+        .title-layout {
+            text-align: center;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+        }
+
+        .title-layout h1 { font-size: 110px; font-style: italic; margin-bottom: 15px; letter-spacing: -2px; }
+        .title-layout .author { font-size: 22px; letter-spacing: 6px; color: var(--color-ochre); }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            width: 100%;
+            align-items: center;
+        }
+
+        .tiled-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            width: 100%;
+        }
+
+        .tile {
+            background-color: #141211;
+            border: 1px solid var(--color-ash);
+            padding: 35px;
+            text-align: left;
+        }
+
+        .tile h3 { font-size: 26px; margin-bottom: 15px; font-style: italic; color: var(--color-ochre); }
+
+        .image-wrapper {
+            width: 100%;
+            height: 420px;
+            overflow: hidden;
+            border: 1px solid var(--color-ash);
+            background: #000;
+            position: relative;
+        }
+
+        .image-wrapper img, .full-bg-image, .bleed-image-side {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: contrast(1.1) brightness(0.8) sepia(0.2);
+            opacity: 1;
+            transition: opacity 1s ease-in;
+        }
+
+        .full-bg-image {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 1;
+            z-index: 0;
+            filter: contrast(1.2) brightness(0.7);
+        }
+
+        .bullet-list ul { list-style: none; padding: 0; margin: 0; }
+        .bullet-list li { position: relative; padding-left: 45px; margin-bottom: 35px; }
+        .bullet-list i { position: absolute; left: 0; top: 6px; color: var(--color-ochre); font-size: 1rem; }
+
+        .bleed-image-layout { display: grid; grid-template-columns: 1fr 1fr; padding: 0 !important; align-items: start; }
+        .bleed-image-layout .content-container { padding: 80px; display: flex; flex-direction: column; justify-content: center; height: 100%; }
+        .bleed-image-layout .image-container { height: 720px; width: 100%; background: #000; position: relative; }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 25px; }
+        th { text-align: left; padding: 18px; border-bottom: 1px solid var(--color-ochre); font-family: 'Courier Prime'; font-size: 12px; color: var(--color-ochre); }
+        td { padding: 18px; border-bottom: 1px solid var(--color-ash); }
+
+        .timeline-layout { display: flex; justify-content: space-between; position: relative; width: 100%; }
+        .timeline-item { width: 30%; position: relative; padding-top: 25px; }
+        .timeline-dot { width: 8px; height: 8px; background: var(--color-ochre); border-radius: 50%; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+<!-- Slide 1: Title_Slide -->
+<div class="slide-container" id="slide1">
+    <img src="00.png" class="full-bg-image">
+    <div class="title-layout">
+        <p class="mono mb-4">A FILM BY</p>
+        <h1>The 4th Day</h1>
+        <div style="width: 100px; height: 1px; background: var(--color-ochre); margin: 25px 0;"></div>
+        <p class="author">FRANCESCA SCHICCHERA</p>
+    </div>
+</div>
+
+<!-- Slide 2: Two_Column_Tiled_Text (Logline) -->
+<div class="slide-container" id="slide2">
+    <h2 class="slide-title">The Determined Destiny</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div>
+                <p class="mono mb-4">Logline</p>
+                <h3 style="font-size: 38px; line-height: 1.2; margin-bottom: 25px;">
+                    A retired Messiah, living as an anonymous olive farmer in Tuscany, is forced back into his own determined destiny by a reunion of his past.
+                </h3>
+                <p>When a car crash brings Peter to his door during a storm, the silence of the land is broken. A poetic fable about the weight of martyrdom and the fragile sanctuary of the vineyard.</p>
+            </div>
+            <div class="image-wrapper">
+                <img src="01.png">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 3: Tiled_Text_With_Icons (Tone & Style) -->
+<div class="slide-container" id="slide3">
+    <h2 class="slide-title">Cinematic DNA: The Duality</h2>
+    <div class="content-area">
+        <div class="tiled-content">
+            <div class="tile">
+                <p class="mono">The Observational Lens</p>
+                <h3>Spiritual Realism</h3>
+                <p>Observational patience that finds the divine in manual labor and nature's silence. Not neorealism, but a structured poetry of the formal image.</p>
+            </div>
+            <div class="tile">
+                <p class="mono">Kasdan's Friction</p>
+                <h3>Mundane Community</h3>
+                <p>A dysfunctional, earthly sense of group. Messy dynamics clashing with the stillness of the farm. Un-sacred friction within a group of friends.</p>
+            </div>
+            <div class="tile">
+                <p class="mono">Atmosphere</p>
+                <h3>Clash & Idyll</h3>
+                <p>Violence disrupts the tranquility. High contrast between the formal beauty of the hills and the raw grit of human desperation.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 4: Image_Right_Text_Left (Synopsis) -->
+<div class="slide-container" id="slide4">
+    <h2 class="slide-title">The Narrative Harvest</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div>
+                <p class="mono mb-4">Synopsis</p>
+                <p><strong>ACT I:</strong> A storm leads Peter to a stone farmhouse. He finds Jesus, hidden in the vines for years. The past returns with the pull of a hood.</p>
+                <p><strong>ACT II:</strong> The Apostles arrive with gifts and baggage. The "Big Chill" ensues as they debate the "Fourth Day"—a peace Mary Magdalene fights to keep.</p>
+                <p><strong>ACT III:</strong> A festival miracle leads to a senseless modern end. The Messiah dies not on a cross, but on a desolate moonlit road.</p>
+            </div>
+            <div class="image-wrapper">
+                <img src="02.png">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 5: Tiled_Text_With_Icons (Characters) -->
+<div class="slide-container" id="slide5">
+    <h2 class="slide-title">The Ensemble of the Earth</h2>
+    <div class="content-area">
+        <div class="tiled-content" style="grid-template-columns: repeat(4, 1fr);">
+            <div class="tile">
+                <p class="mono">The Farmer</p>
+                <h3>Jesus</h3>
+                <p>Weathered, silent, content with the soil. A man of manual labor whose predestination is a ghost that cannot be outrun.</p>
+            </div>
+            <div class="tile">
+                <p class="mono">The Seeker</p>
+                <h3>Peter</h3>
+                <p>Restless and intellectual. He needs the myth to be real to justify his own life. He breaks the silence of the sanctuary.</p>
+            </div>
+            <div class="tile">
+                <p class="mono">The Guardian</p>
+                <h3>Mary</h3>
+                <p>Defiant and realistic. She sees the man, not the icon. She protects the domestic idyll against the coming storm.</p>
+            </div>
+            <div class="tile">
+                <p class="mono">The Companion</p>
+                <h3>Judas</h3>
+                <p>The realist. He understood the sacrifice before any of them. The one who truly shares the burden of the path.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 6: Styled_Bullet_Points (Sensory World) -->
+<div class="slide-container" id="slide6">
+    <h2 class="slide-title">The Formal Language</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div class="bullet-list">
+                <ul>
+                    <li><i class="fa-solid fa-palette"></i> <strong>The Palette:</strong> Formal tones reflecting the environment's solemnity. Shades found in deep harvest stains, weathered stone, and inky shadows.</li>
+                    <li><i class="fa-solid fa-ear-listen"></i> <strong>Soundscape:</strong> Visceral reality—the crash of plates, pouring wine, an engine in the distance, and the relentless ring of a phone in the dirt.</li>
+                    <li><i class="fa-solid fa-camera"></i> <strong>Cinematography:</strong> Agonizing slow pans. The camera breathes with pain, extending the silence of nature through movement. No fixed frames.</li>
+                </ul>
+            </div>
+            <div class="image-wrapper">
+                <img src="03.png">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 7: Tiled_Images (Key Locations) -->
+<div class="slide-container" id="slide7">
+    <h2 class="slide-title">The Terrain of Martyrdom</h2>
+    <div class="content-area">
+        <div class="tiled-content">
+            <div class="image-tile">
+                <div class="image-wrapper">
+                    <img src="04.png">
+                </div>
+                <p class="mono mt-4">The Olive Grove</p>
+                <p class="text-sm italic">The sanctuary of silence and ancient labor.</p>
+            </div>
+            <div class="image-tile">
+                <div class="image-wrapper">
+                    <img src="05.png">
+                </div>
+                <p class="mono mt-4">The Farmhouse</p>
+                <p class="text-sm italic">The stone pressure cooker of a dysfunctional reunion.</p>
+            </div>
+            <div class="image-tile">
+                <div class="image-wrapper">
+                    <img src="06.png">
+                </div>
+                <p class="mono mt-4">The Road</p>
+                <p class="text-sm italic">The desolate path to a modern-day Calvary.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 8: The Formal Rigor (TEXT ONLY) -->
+<div class="slide-container" id="slide8">
+    <h2 class="slide-title">The Formal Rigor</h2>
+    <div class="content-area" style="text-align: center; max-width: 900px; margin: 0 auto;">
+        <h3 style="font-size: 48px; margin-bottom: 30px; color: var(--color-cream); font-style: italic;">Predestined Sacrifice</h3>
+        <p style="font-size: 28px; line-height: 1.6; color: #a8a29e; font-style: italic;">
+            Observation through an uncompromising formal rigor. Agonizing slow pans where the camera breathes with pain. A man compelling himself to live his predestined martyrdom. A clash of violence within an idyllic frame. High film grain, texture over perfection.
+        </p>
+    </div>
+</div>
+
+<!-- Slide 9: Bleed_Image_Right (Production Strategy) -->
+<div class="slide-container bleed-image-layout" id="slide9">
+    <div class="content-container">
+        <h2 class="slide-title">The Residency</h2>
+        <div class="content-area">
+            <p class="mono mb-4">Embedded Production</p>
+            <p><strong>"Farm-Sitter" Strategy:</strong> A 4-week immersive residency in a working Tuscan estate. Minimal crew. The cast inhabits the space 24/7, allowing the land to seep into the performance.</p>
+            <p>Authenticity is our production value. We are inhabiting a world where the harvest and the film are one.</p>
+        </div>
+    </div>
+    <div class="image-container">
+        <img class="bleed-image-side" src="07.png">
+    </div>
+</div>
+
+<!-- Slide 10: Table (Strategic Model) -->
+<div class="slide-container" id="slide10">
+    <h2 class="slide-title">The Strategic Barter</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div>
+                <p class="mono mb-4">The Exchange</p>
+                <p>Hosted by a family-run biological farm. In exchange for residency and catering, we produce cinematic marketing assets for their organic labels.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="mono">Farm Asset</th>
+                            <th class="mono">Film Exchange</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Location & Housing</td>
+                            <td>Oil & Wine Label Visuals</td>
+                        </tr>
+                        <tr>
+                            <td>Catering (Home-grown)</td>
+                            <td>Brand Documentary Shorts</td>
+                        </tr>
+                        <tr>
+                            <td>Staff Support</td>
+                            <td>Social Media Cinematic Assets</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="image-wrapper" style="height: 450px;">
+                <img src="08.png">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 11: Timeline (Roadmap) -->
+<div class="slide-container" id="slide11">
+    <h2 class="slide-title">The Harvest Roadmap</h2>
+    <div class="content-area">
+        <div class="timeline-layout">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <p class="mono">Spring 2026</p>
+                <p><strong>Pre-Production</strong><br>Marketing Content Pilot for the Host Farm.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <p class="mono">Autumn 2026</p>
+                <p><strong>Principal Photography</strong><br>Immersive harvest shoot.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <p class="mono">Spring 2027</p>
+                <p><strong>Festival Run</strong><br>Premiere push. Post-production wrap.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 12: Q&A -->
+<div class="slide-container" id="slide12">
+    <img src="09.png" class="full-bg-image">
+    <div class="title-layout">
+        <p class="mono mb-4">Is the sacrifice worth the destiny?</p>
+        <h1 style="font-size: 80px;">Join the Harvest</h1>
+        <div style="width: 100px; height: 1px; background: var(--color-ochre); margin: 25px 0;"></div>
+        <p class="mono" style="font-size: 16px; color: var(--color-cream);">francesca.schicchera@gmail.com</p>
+    </div>
+</div>
